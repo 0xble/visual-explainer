@@ -129,6 +129,21 @@ Apply these principles to every diagram:
 
 **Tell the user** the file path so they can re-open or share it.
 
+**Large file strategy.** If your write tool truncates large outputs (common around 15KB+), write HTML files using shell heredocs and append in chunks:
+
+```sh
+mkdir -p ~/.agent/diagrams
+
+cat > ~/.agent/diagrams/filename.html << 'EOF'
+... first chunk ...
+EOF
+cat >> ~/.agent/diagrams/filename.html << 'EOF'
+... second chunk ...
+EOF
+```
+
+Keep each chunk modest (for example, under ~12KB) to avoid tool output limits.
+
 ## Diagram Types
 
 ### Architecture / System Diagrams
