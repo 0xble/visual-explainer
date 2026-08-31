@@ -8,7 +8,7 @@ The page uses a two-column CSS Grid: sidebar (TOC) + main content. On mobile it 
 
 ```html
 <body>
-<div class="wrap">
+<div class="layout-toc">
 
   <nav class="toc" id="toc">
     <div class="toc-title">Contents</div>
@@ -28,30 +28,31 @@ The page uses a two-column CSS Grid: sidebar (TOC) + main content. On mobile it 
     <!-- section content -->
   </div><!-- /main -->
 
-</div><!-- /wrap -->
+</div><!-- /layout-toc -->
 </body>
 ```
 
 Key structural rules:
-- `<nav class="toc">` is the **first child** of `.wrap`
+- `<nav class="toc">` is the **first child** of `.layout-toc`
 - All page content goes inside `<div class="main">`
 - Every section heading gets an `id="s1"`, `id="s2"`, etc.
 - TOC links use `href="#s1"` matching those IDs
 - Keep TOC link text short (truncate long section names)
+- Do **not** use bare `.wrap` for generic page containers; reserve TOC layout for `.layout-toc` only
 
 ## CSS
 
 ### Wrap (grid layout)
 
 ```css
-.wrap {
+.layout-toc {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 170px 1fr;
   gap: 0 40px;
 }
-.main { min-width: 0; }
+.layout-toc .main { min-width: 0; }
 ```
 
 ### TOC — Desktop (sticky sidebar)
@@ -103,10 +104,10 @@ Replace `var(--accent)` with your page's primary accent color variable (e.g., `v
 
 ```css
 @media (max-width: 1000px) {
-  .wrap { grid-template-columns: 1fr; padding-top: 0; }
+  .layout-toc { grid-template-columns: 1fr; padding-top: 0; }
   body { padding-top: 0; }
 
-  .toc {
+  .layout-toc .toc {
     position: sticky;
     top: 0;
     z-index: 200;
@@ -124,10 +125,10 @@ Replace `var(--accent)` with your page's primary accent color variable (e.g., `v
     padding-right: 40px;
     grid-row: auto;
   }
-  .toc::-webkit-scrollbar { display: none; }
-  .toc-title { display: none; }
+  .layout-toc .toc::-webkit-scrollbar { display: none; }
+  .layout-toc .toc-title { display: none; }
 
-  .toc a {
+  .layout-toc .toc a {
     white-space: nowrap;
     flex-shrink: 0;
     border-left: none;
@@ -136,13 +137,13 @@ Replace `var(--accent)` with your page's primary accent color variable (e.g., `v
     padding: 6px 10px;
     font-size: 10px;
   }
-  .toc a.active {
+  .layout-toc .toc a.active {
     border-left: none;
     border-bottom-color: var(--accent);
     background: var(--surface);
   }
 
-  .main { padding-top: 20px; }
+  .layout-toc .main { padding-top: 20px; }
 
   /* Offset scroll target so headings clear the sticky bar */
   .sec-head { scroll-margin-top: 52px; }

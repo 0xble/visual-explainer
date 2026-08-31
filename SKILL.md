@@ -46,7 +46,7 @@ Vary the choice each time. If the last diagram was dark and technical, make the 
 
 **For CSS/layout patterns and SVG connectors**, read `./references/css-patterns.md`.
 
-**For pages with 4+ sections** (reviews, recaps, dashboards), also read `./references/responsive-nav.md` for section navigation with sticky sidebar TOC on desktop and horizontal scrollable bar on mobile.
+**For pages with 4+ sections** (reviews, recaps, dashboards), also read `./references/responsive-nav.md` for section navigation with sticky sidebar TOC on desktop and horizontal scrollable bar on mobile. Use the explicit `.layout-toc` shell and avoid generic container names (`.wrap`, `.main`) for non-TOC pages.
 
 **Choosing a rendering approach:**
 
